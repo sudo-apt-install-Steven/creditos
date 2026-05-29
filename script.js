@@ -1,18 +1,43 @@
-// Form submission
+// Form submission with mailto logic
 const contactForm = document.getElementById("contact-form");
 
 contactForm?.addEventListener("submit", (event) => {
   event.preventDefault();
+
+  const recipient = document.getElementById("recipient").value;
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
+
+  const emails = {
+    joao: "crisostomo.neves@estudante.ifro.edu.br",
+    vinicius: "vinicius.costa@estudante.ifro.edu.br",
+    steven: "melos.s@estudante.ifro.edu.br"
+  };
+
+  let targetEmail = "";
+  if (recipient === "todos") {
+    targetEmail = `${emails.joao},${emails.vinicius},${emails.steven}`;
+  } else {
+    targetEmail = emails[recipient];
+  }
+
+  const subject = encodeURIComponent(`Contato pelo site: ${name}`);
+  const body = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`);
+
+  // Trigger mailto link
+  window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
+
+  // Animation feedback
   const submitBtn = contactForm.querySelector('.submit-btn');
   const originalText = submitBtn.textContent;
   
   submitBtn.textContent = 'Enviando...';
   submitBtn.style.opacity = '0.7';
 
-  // Simulate network request
   setTimeout(() => {
     contactForm.reset();
-    submitBtn.textContent = 'Mensagem Enviada!';
+    submitBtn.textContent = 'Cliente de Email Aberto!';
     submitBtn.style.background = '#00ffd0';
     submitBtn.style.color = '#000';
     

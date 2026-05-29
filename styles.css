@@ -233,6 +233,7 @@ body {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center 15%;
   background-color: #1a1a1c;
 }
 
@@ -416,7 +417,8 @@ body {
 }
 
 .contact-form input,
-.contact-form textarea {
+.contact-form textarea,
+.contact-form select {
   width: 100%;
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid var(--glass-border);
@@ -426,10 +428,17 @@ body {
   font-family: inherit;
   font-size: 1rem;
   transition: all 0.3s ease;
+  appearance: none;
+}
+
+.contact-form select option {
+  background: var(--bg-color);
+  color: var(--text-main);
 }
 
 .contact-form input:focus,
-.contact-form textarea:focus {
+.contact-form textarea:focus,
+.contact-form select:focus {
   outline: none;
   border-color: rgba(255, 255, 255, 0.25);
   background: rgba(0, 0, 0, 0.4);
